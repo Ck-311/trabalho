@@ -6,10 +6,573 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sobre o blog TechGamer News e sua missão no mundo gamer e tecnológico">
     <title>Sobre | TechGamer News</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #ff6b35;
+            --accent-color: #7c3aed;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #000000;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --gradient-1: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            --gradient-2: linear-gradient(135deg, #ff6b35 0%, #7c3aed 100%);
+            --gradient-3: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--darker-bg);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            left: 0;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 120px;
+            padding: 2rem 0;
+        }
+
+        .page-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        /* About Layout */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .about-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInLeft 1s ease-out 0.3s both;
+        }
+
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-1);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .about-content h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .about-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .about-content strong {
+            color: var(--secondary-color);
+        }
+
+        .mission-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInRight 1s ease-out 0.3s both;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-2);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .mission-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .mission-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .mission-item:hover {
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateX(5px);
+        }
+
+        .mission-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .mission-text {
+            flex: 1;
+        }
+
+        .mission-text h4 {
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .mission-text p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-3);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .stats-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Team Section */
+        .team-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .team-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-2);
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .team-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .team-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-bio {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            main {
+                margin-top: 140px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .about-content, .mission-card, .stats-section, .team-section {
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="particles" id="particles"></div>
+    
     <header>
         <div class="container">
             <h1>TechGamer News</h1>
@@ -25,20 +588,219 @@
     </header>
 
     <main class="container">
-        <h2>Sobre Nós</h2>
-        <p>O <strong>TechGamer News</strong> é um blog dedicado a trazer as principais novidades do universo da
-            tecnologia gamer: lançamentos, análises de hardware, cobertura de eventos e tudo que move a indústria dos
-            games e da tecnologia.</p>
+        <h2 class="page-title">Sobre Nós</h2>
+        <p class="page-subtitle">Conheça a história, missão e equipe do TechGamer News</p>
 
-        <p>Nossa missão é informar com qualidade, seriedade e uma pitada de diversão para quem respira jogos,
-            computadores, consoles e inovação.</p>
+        <div class="about-layout">
+            <div class="about-content">
+                <h3>Nossa História</h3>
+                <p>O <strong>TechGamer News</strong> é um blog dedicado a trazer as principais novidades do universo da tecnologia gamer: lançamentos, análises de hardware, cobertura de eventos e tudo que move a indústria dos games e da tecnologia.</p>
+                <p>Nossa missão é informar com qualidade, seriedade e uma pitada de diversão para quem respira jogos, computadores, consoles e inovação.</p>
+                <p>Se você é gamer, entusiasta de hardware ou apenas curioso por tecnologia, aqui é seu lugar.</p>
+            </div>
 
-        <p>Se você é gamer, entusiasta de hardware ou apenas curioso por tecnologia, aqui é seu lugar.</p>
+            <div class="mission-card">
+                <h3>Nossa Missão</h3>
+                
+                <div class="mission-item">
+                    <div class="mission-icon">🎮</div>
+                    <div class="mission-text">
+                        <h4>Gaming em Foco</h4>
+                        <p>Cobertura completa do mundo dos games</p>
+                    </div>
+                </div>
+
+                <div class="mission-item">
+                    <div class="mission-icon">🔧</div>
+                    <div class="mission-text">
+                        <h4>Hardware Expert</h4>
+                        <p>Análises técnicas e reviews detalhadas</p>
+                    </div>
+                </div>
+
+                <div class="mission-item">
+                    <div class="mission-icon">📰</div>
+                    <div class="mission-text">
+                        <h4>Notícias Quentes</h4>
+                        <p>Primeiras informações do setor</p>
+                    </div>
+                </div>
+
+                <div class="mission-item">
+                    <div class="mission-icon">🎯</div>
+                    <div class="mission-text">
+                        <h4>Qualidade Total</h4>
+                        <p>Conteúdo de alta qualidade sempre</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h3 class="stats-title">Nossos Números</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">500K+</span>
+                    <div class="stat-label">Leitores Mensais</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2500+</span>
+                    <div class="stat-label">Artigos Publicados</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">5</span>
+                    <div class="stat-label">Anos de Experiência</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100+</span>
+                    <div class="stat-label">Reviews Exclusivas</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h3 class="team-title">Nossa Equipe</h3>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar">👨‍💻</div>
+                    <div class="team-name">Alex Silva</div>
+                    <div class="team-role">Editor-Chefe</div>
+                    <div class="team-bio">Especialista em hardware e líder da equipe editorial com mais de 10 anos de experiência no setor tech.</div>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">🎮</div>
+                    <div class="team-name">Marina Costa</div>
+                    <div class="team-role">Editora de Games</div>
+                    <div class="team-bio">Gamer apaixonada e jornalista especializada em análises de jogos e cobertura de eventos do setor.</div>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">🔧</div>
+                    <div class="team-name">Carlos Tech</div>
+                    <div class="team-role">Analista de Hardware</div>
+                    <div class="team-bio">Engenheiro de computação focado em testes de performance e análises técnicas detalhadas.</div>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">📱</div>
+                    <div class="team-name">Ana Digital</div>
+                    <div class="team-role">Social Media</div>
+                    <div class="team-bio">Responsável pela presença digital e engajamento com a comunidade gamer nas redes sociais.</div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 TechGamer News. Todos os direitos reservados.</p>
+        <div class="container">
+            <p>&copy; 2025 TechGamer News. Todos os direitos reservados.</p>
+        </div>
     </footer>
+
+    <script>
+        // Criar partículas animadas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Animação dos números das estatísticas
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const finalValue = target.textContent;
+                        const numericValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                        
+                        let currentValue = 0;
+                        const increment = numericValue / 50;
+                        
+                        const counter = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= numericValue) {
+                                target.textContent = finalValue;
+                                clearInterval(counter);
+                            } else {
+                                const suffix = finalValue.includes('K') ? 'K+' : finalValue.includes('+') ? '+' : '';
+                                target.textContent = Math.floor(currentValue) + suffix;
+                            }
+                        }, 50);
+                        
+                        observer.unobserve(target);
+                    }
+                });
+            });
+            
+            statNumbers.forEach(stat => observer.observe(stat));
+        }
+
+        // Animação dos membros da equipe
+        function animateTeamMembers() {
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach((member, index) => {
+                member.style.animationDelay = `${0.8 + index * 0.1}s`;
+                member.style.animation = 'fadeInUp 0.8s ease-out both';
+            });
+        }
+
+        // Animação dos itens da missão
+        function animateMissionItems() {
+            const missionItems = document.querySelectorAll('.mission-item');
+            missionItems.forEach((item, index) => {
+                item.style.animationDelay = `${0.5 + index * 0.1}s`;
+                item.style.animation = 'fadeInRight 0.8s ease-out both';
+            });
+        }
+
+        // Efeito de hover nas seções
+        function addHoverEffects() {
+            const cards = document.querySelectorAll('.about-content, .mission-card, .stats-section, .team-section');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-5px)';
+                    card.style.boxShadow = '0 20px 40px rgba(0, 212, 255, 0.1)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = 'none';
+                });
+            });
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateStats();
+            animateTeamMembers();
+            animateMissionItems();
+            addHoverEffects();
+        });
+
+        // Efeito de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
