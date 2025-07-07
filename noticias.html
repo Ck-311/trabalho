@@ -6,10 +6,420 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Notícias atualizadas sobre o mundo gamer e de tecnologia no TechGamer News">
     <title>Notícias | TechGamer News</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #ff6b35;
+            --accent-color: #7c3aed;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #000000;
+            --card-bg: #1a1a1a;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --gradient-1: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            --gradient-2: linear-gradient(135deg, #ff6b35 0%, #7c3aed 100%);
+            --gradient-3: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--darker-bg);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        nav a:hover::before {
+            left: 0;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 120px;
+            padding: 2rem 0;
+        }
+
+        .page-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* Artigos */
+        .articles-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        article {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        article:hover::before {
+            opacity: 0.05;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        article:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        article:nth-child(3n) {
+            animation-delay: 0.4s;
+        }
+
+        article h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        article h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 30px;
+            background: var(--gradient-2);
+            border-radius: 2px;
+        }
+
+        article p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Destaque para artigos específicos */
+        #rtx5090 {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border-color: var(--primary-color);
+        }
+
+        #ps6 {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            border-color: var(--secondary-color);
+        }
+
+        /* Tags de categoria */
+        .category-tag {
+            display: inline-block;
+            background: var(--gradient-2);
+            color: var(--text-light);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-tag.hardware {
+            background: var(--gradient-1);
+        }
+
+        .category-tag.console {
+            background: var(--gradient-2);
+        }
+
+        .category-tag.awards {
+            background: var(--gradient-3);
+        }
+
+        /* Data de publicação */
+        .publish-date {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .publish-date::before {
+            content: '📅';
+        }
+
+        /* Botão de leia mais */
+        .read-more {
+            display: inline-block;
+            background: var(--gradient-2);
+            color: var(--text-light);
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .read-more::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-3);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .read-more:hover::before {
+            left: 0;
+        }
+
+        .read-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            article {
+                padding: 1.5rem;
+            }
+
+            article h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            main {
+                margin-top: 140px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            article h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="particles" id="particles"></div>
+    
     <header>
         <div class="container">
             <h1>TechGamer News</h1>
@@ -25,30 +435,131 @@
     </header>
 
     <main class="container">
-        <h2>Últimas Notícias</h2>
+        <h2 class="page-title">Últimas Notícias</h2>
 
-        <article id="rtx5090">
-            <h3>Nova RTX 5090 é revelada</h3>
-            <p>A nova geração da NVIDIA traz um salto gigantesco em desempenho e recursos para IA e Ray Tracing. Com
-                mais núcleos CUDA e memória GDDR7, a placa promete dominar o mercado high-end.</p>
-        </article>
+        <div class="articles-grid">
+            <article id="rtx5090">
+                <span class="category-tag hardware">Hardware</span>
+                <div class="publish-date">05 de Julho, 2025</div>
+                <h3>Nova RTX 5090 é revelada: Revolução em Performance</h3>
+                <p>A nova geração da NVIDIA traz um salto gigantesco em desempenho e recursos para IA e Ray Tracing. Com mais núcleos CUDA e memória GDDR7, a placa promete dominar o mercado high-end com até 70% mais performance que a geração anterior.</p>
+                <p>Os primeiros benchmarks revelam números impressionantes: 8K gaming a 60fps em títulos AAA, ray tracing em tempo real sem perdas significativas de performance, e capacidades de IA que revolucionam a criação de conteúdo.</p>
+                <a href="#" class="read-more">Leia mais →</a>
+            </article>
 
-        <article id="ps6">
-            <h3>PlayStation 6: Imagens e especificações vazadas</h3>
-            <p>Fontes confiáveis divulgam renderizações e specs iniciais do PS6, indicando retrocompatibilidade total e
-                novo design futurista.</p>
-        </article>
+            <article id="ps6">
+                <span class="category-tag console">Console</span>
+                <div class="publish-date">04 de Julho, 2025</div>
+                <h3>PlayStation 6: Imagens e especificações vazadas</h3>
+                <p>Fontes confiáveis divulgam renderizações e specs iniciais do PS6, indicando retrocompatibilidade total e novo design futurista. O console promete suporte nativo a 8K, ray tracing avançado e tecnologias de IA para upscaling.</p>
+                <p>Entre os destaques estão o novo processador AMD Zen 5, GPU customizada baseada em RDNA 4, e SSD NVMe de 2TB com velocidades de transferência revolucionárias. O lançamento está previsto para o final de 2026.</p>
+                <a href="#" class="read-more">Leia mais →</a>
+            </article>
 
-        <article>
-            <h3>Game Awards 2025: Lista de indicados</h3>
-            <p>Confira os principais nomes da indústria na corrida pelos prêmios de Jogo do Ano, Melhor Narrativa,
-                Direção de Arte e mais!</p>
-        </article>
+            <article>
+                <span class="category-tag awards">Awards</span>
+                <div class="publish-date">03 de Julho, 2025</div>
+                <h3>Game Awards 2025: Lista completa de indicados</h3>
+                <p>Confira os principais nomes da indústria na corrida pelos prêmios de Jogo do Ano, Melhor Narrativa, Direção de Arte e mais! Este ano promete ser um dos mais competitivos da história dos Game Awards.</p>
+                <p>Entre os destaques estão títulos como "Stellar Horizon", "Cyberpunk 2088", "The Last Guardian II" e "Horizon: Zero Dawn III". A cerimônia acontecerá no dia 12 de dezembro, com apresentação de Geoff Keighley.</p>
+                <a href="#" class="read-more">Leia mais →</a>
+            </article>
+
+            <article>
+                <span class="category-tag hardware">Hardware</span>
+                <div class="publish-date">02 de Julho, 2025</div>
+                <h3>AMD Ryzen 9000X3D: Vazam benchmarks impressionantes</h3>
+                <p>Os novos processadores da AMD com tecnologia 3D V-Cache prometem revolucionar o gaming em PC. Os primeiros testes mostram ganhos de até 25% em jogos comparado à geração anterior.</p>
+                <p>A arquitetura Zen 5 combinada com o cache 3D empilhado oferece uma experiência de gaming sem precedentes, mantendo temperaturas baixas e eficiência energética superior.</p>
+                <a href="#" class="read-more">Leia mais →</a>
+            </article>
+
+            <article>
+                <span class="category-tag console">Console</span>
+                <div class="publish-date">01 de Julho, 2025</div>
+                <h3>Nintendo Switch 2: Primeiras imagens oficiais reveladas</h3>
+                <p>A Nintendo finalmente revelou as primeiras imagens oficiais do sucessor do Switch. O novo console mantém o conceito híbrido mas com tela OLED de 8 polegadas e suporte a 4K quando conectado à TV.</p>
+                <p>As especificações incluem chip NVIDIA Tegra customizado, 12GB de RAM e armazenamento interno de 256GB expansível. O lançamento está confirmado para março de 2026.</p>
+                <a href="#" class="read-more">Leia mais →</a>
+            </article>
+
+            <article>
+                <span class="category-tag awards">Esports</span>
+                <div class="publish-date">30 de Junho, 2025</div>
+                <h3>Mundial de League of Legends 2025: Grupos definidos</h3>
+                <p>Os grupos do Mundial de LoL 2025 foram definidos e prometem confrontos épicos. As equipes brasileiras LOUD e paiN Gaming estão em grupos desafiadores mas com chances reais de classificação.</p>
+                <p>O torneio acontecerá em Paris, com a final no estádio Stade de France. O prize pool total é de 5 milhões de dólares, o maior da história do campeonato.</p>
+                <a href="#" class="read-more">Leia mais →</a>
+            </article>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 TechGamer News. Todos os direitos reservados.</p>
+        <div class="container">
+            <p>&copy; 2025 TechGamer News. Todos os direitos reservados.</p>
+        </div>
     </footer>
+
+    <script>
+        // Criar partículas animadas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Efeito de scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animação de entrada dos artigos
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('article').forEach(article => {
+            article.style.opacity = '0';
+            article.style.transform = 'translateY(20px)';
+            article.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(article);
+        });
+
+        // Efeito de hover nos artigos
+        document.querySelectorAll('article').forEach(article => {
+            article.addEventListener('mouseenter', () => {
+                article.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            article.addEventListener('mouseleave', () => {
+                article.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Inicializar partículas
+        createParticles();
+    </script>
 </body>
 
 </html>
